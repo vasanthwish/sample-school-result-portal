@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<head>
+  <base target="_top">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(-45deg,#a88039, #64a839, #395ea8, #9615bd);
+  background-size: 400% 400%;
+  animation: gradientBG 12s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      width: 350px;
+      margin: 40px auto;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+    }
+
+    img {
+       width: 200px;   /* increase size */
+  height: auto;
+  margin-bottom: 15px;
+    }
+
+    h2 {
+       font-family: "Helvetica", Arial, sans-serif;
+      margin: 5px 0;
+    }
+
+    input {
+      width: 90%;
+      padding: 8px;
+      margin: 8px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 95%;
+      padding: 10px;
+      background-color: #2e86de;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1b4f72;
+    }
+
+    .result-box {
+      margin-top: 20px;
+      text-align: left;
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+    }
+ 
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    
+    <!-- Replace FILE_ID below -->
+    <img src="https://i.postimg.cc/NfKqyTM0/logo-01.png">
+
+    <h2><b>Paavai Vidhyashram Senior Secondary School</b></h2>
+    <p>Student Result Portal</p>
+
+    <input type="text" id="regno" placeholder="Register Number">
+    <input type="date" id="dob">
+    <button onclick="getResult()">View Result</button>
+
+    <div id="result"></div>
+  </div>
+
+<script>
+function getResult() {
+  var regno = document.getElementById("regno").value;
+  var dob = document.getElementById("dob").value;
+
+  google.script.run.withSuccessHandler(showResult)
+    .checkResult(regno, dob);
+}
+
+function showResult(data) {
+   if (data == null) {
+    document.getElementById("result").innerHTML =
+      "<p style='color:red;'>Invalid Register Number or DOB</p>";
+  } else {
+    document.getElementById("result").innerHTML = `
+      <div class="result-box" id="resultCard">
+        <h3>Result</h3>
+        Name: ${data.name}<br>
+        Class: ${data.class}<br><br>
+        Maths: ${data.maths}<br>
+        Science: ${data.science}<br>
+        English: ${data.english}<br><br>
+        <strong>Total: ${data.total}</strong>
+      </div>
+      <br><br>
+
+    `;
+  }
+}
+
+
+</script>
+
+</body>
+</html>
