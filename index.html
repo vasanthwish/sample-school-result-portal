@@ -104,12 +104,19 @@ function getResult() {
   var regno = document.getElementById("regno").value;
   var dob = document.getElementById("dob").value;
 
-  google.script.run.withSuccessHandler(showResult)
-    .checkResult(regno, dob);
+  fetch("https://script.google.com/macros/s/AKfycbzv5dZC0GZ_sL8_Q8yeox3uEMflegLAdSQxupEhT9KBlBrdyzfR8MKcySs-Zn0rzHaKIQ/exec?regno=" + regno + "&dob=" + dob)
+    .then(response => response.json())
+    .then(data => {
+      showResult(data);
+    })
+    .catch(error => {
+      document.getElementById("result").innerHTML =
+        "<p style='color:red;'>Error fetching result</p>";
+    });
 }
 
 function showResult(data) {
-   if (data == null) {
+  if (!data || data.error) {
     document.getElementById("result").innerHTML =
       "<p style='color:red;'>Invalid Register Number or DOB</p>";
   } else {
@@ -123,13 +130,9 @@ function showResult(data) {
         English: ${data.english}<br><br>
         <strong>Total: ${data.total}</strong>
       </div>
-      <br><br>
-
     `;
   }
 }
-
-
 </script>
 
 </body>
