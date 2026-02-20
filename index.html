@@ -104,7 +104,7 @@ function getResult() {
   var regno = document.getElementById("regno").value;
   var dob = document.getElementById("dob").value;
 
-  fetch("https://script.google.com/macros/s/AKfycbzv5dZC0GZ_sL8_Q8yeox3uEMflegLAdSQxupEhT9KBlBrdyzfR8MKcySs-Zn0rzHaKIQ/exec?regno=" + regno + "&dob=" + dob)
+  fetch("https://script.google.com/macros/s/AKfycbzmNS2nOYMHdDK0uNbVeWeTBxFTtmjVVJ5KftB6Jf3NmzWFnKDhX_NZp7_RMdfGSSUohA/exec?regno=" + regno + "&dob=" + dob)
     .then(response => response.json())
     .then(data => {
       showResult(data);
