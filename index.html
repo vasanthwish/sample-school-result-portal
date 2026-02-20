@@ -72,12 +72,48 @@
     }
 
     .result-box {
-      margin-top: 20px;
-      text-align: left;
-      background: #f9f9f9;
-      padding: 15px;
-      border-radius: 8px;
-    }
+  margin-top: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #2e86de;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.result-box h3 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #2e86de;
+}
+
+.marksheet-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.marksheet-table th {
+  background-color: #2e86de;
+  color: white;
+  padding: 8px;
+  text-align: center;
+}
+
+.marksheet-table td {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.subject-row:nth-child(even) {
+  background-color: #f2f6fc;
+}
+
+.total-row {
+  background-color: #d4edda;
+  font-weight: bold;
+  font-size: 16px;
+}
  
   </style>
 </head>
@@ -122,13 +158,33 @@ function showResult(data) {
   } else {
     document.getElementById("result").innerHTML = `
       <div class="result-box" id="resultCard">
-        <h3>Result</h3>
-        Name: ${data.name}<br>
-        Class: ${data.class}<br><br>
-        Maths: ${data.maths}<br>
-        Science: ${data.science}<br>
-        English: ${data.english}<br><br>
-        <strong>Total: ${data.total}</strong>
+        <h3>MARK SHEET</h3>
+
+        <p><strong>Name:</strong> ${data.name}</p>
+        <p><strong>Class:</strong> ${data.class}</p>
+
+        <table class="marksheet-table">
+          <tr>
+            <th>Subject</th>
+            <th>Marks</th>
+          </tr>
+          <tr class="subject-row">
+            <td>Mathematics</td>
+            <td>${data.maths}</td>
+          </tr>
+          <tr class="subject-row">
+            <td>Science</td>
+            <td>${data.science}</td>
+          </tr>
+          <tr class="subject-row">
+            <td>English</td>
+            <td>${data.english}</td>
+          </tr>
+          <tr class="total-row">
+            <td>Total</td>
+            <td>${data.total}</td>
+          </tr>
+        </table>
       </div>
     `;
   }
